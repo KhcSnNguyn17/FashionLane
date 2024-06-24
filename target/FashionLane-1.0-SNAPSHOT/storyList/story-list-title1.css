@@ -1,0 +1,14 @@
+.Stories_Title_Container{
+    padding: 20px 60px;
+}
+
+.Stories_Title_Container div{
+    width: 100%;
+    background: black;
+    height: 14px;
+}
+
+.Stories_Title_Container p{
+    font-family: 'Nunito Sans', sans-serif;
+}
+

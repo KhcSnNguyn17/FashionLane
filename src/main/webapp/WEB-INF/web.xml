@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <servlet>
+        <servlet-name>OrderListUserServlet</servlet-name>
+        <servlet-class>controller.user.OrderListUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgetPasswordController</servlet-name>
+        <servlet-class>controller.user.ForgetPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboardSaleController</servlet-name>
+        <servlet-class>controller.saleManager.DashboardSaleController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderListUserServlet</servlet-name>
+        <url-pattern>/OrderListUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgetPasswordController</servlet-name>
+        <url-pattern>/forget-password</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardSaleController</servlet-name>
+        <url-pattern>/sale-dashboard</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>home-servlet</welcome-file>
+    </welcome-file-list>
+</web-app>

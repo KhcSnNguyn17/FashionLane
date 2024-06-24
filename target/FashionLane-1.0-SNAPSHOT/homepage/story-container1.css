@@ -1,0 +1,72 @@
+.Stories_Container{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10vh;
+    height: 100vh;
+}
+
+.Story{
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: auto;
+}
+
+.Story h1{
+    font-size: 46px;
+    margin-bottom: 3vh;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.Story p{
+    width: 90%;
+    font-size: 28px;
+    margin-bottom: 3vh;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.Story button{
+    width: 20%;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    margin-bottom: 3vh;
+}
+.Storyimg{
+    width: 100%;
+}
+
+.Story img{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+@media (max-width: 1080px) {
+    .Stories_Container{
+        flex-direction: column;
+        height: auto;
+    }
+    .Story{
+        width: 100%;
+        margin-bottom: 50px;
+    }
+    .Story button{
+        width: 40%;
+    }
+
+    .Story h1{
+        font-size: 4.888vw;
+    }
+    .Story p{
+        font-size: 2.444vw;
+    }
+}

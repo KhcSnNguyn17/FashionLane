@@ -1,0 +1,140 @@
+.cart_container{
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: -100%;
+    width: 25%;
+    height: 100vh;
+    border-left: 1px solid lightgray;
+    transition: all .50s ease;
+    background: white;
+}
+
+.cart_list{
+    padding: 0px 24px 32px;
+    height: 70vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+.cart_list h1{
+    font-size: 24px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+}
+
+.cart_container #x-icon {
+    font-size: 1rem;
+    padding: 24px 24px 32px;
+}
+
+.cart_item{
+    display: flex;
+    padding: 16px 0px 0px;
+}
+
+.cart_item .cart_item_img{
+    width: 72px;
+    height: 96px;
+}
+.cart_item img{
+    width: 100%;
+}
+
+.cart_item_text{
+    width: 100%;
+    padding: 0px 0px 0px 16px;
+}
+
+.cart_item_name{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.cart_item_text p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 12px;
+}
+
+.cart_item_name p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.cart_item_price{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.cart_item_price p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 12px;
+}
+
+.Cart_Item_Amount_Change{
+    display: flex;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+
+}
+.Cart_Item_Amount_Change button{
+    width: 28px;
+    height: 22px;
+    background-color: white;
+    font-size: 12px;
+    border: none;
+}
+.Cart_Item_Amount_Change p{
+    width: 28px;
+    height: 22px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+/*----------------------------*/
+.checkout_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.subtotal_container{
+    border-top: 1px solid lightgray;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 24px 0px;
+}
+
+.subtotal_container p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.checkout_container .buttonCheckout{
+    font-size: 14px;
+    color: white;
+    background: black;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    height: 56px;
+    width: 100%;
+    text-align: center;
+    margin-top: 24px;
+    border: none;
+}
+
+.openCart{
+   left: 0%;
+}
+
+@media (max-width: 1090px){
+    .cart_container{
+        width: 70%;
+    }
+}

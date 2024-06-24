@@ -1,0 +1,342 @@
+.Checkout_Container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #F5F4F4;
+    position: relative;
+    padding: 40px 0px;
+}
+
+.Information_Container{
+    width: 775px;
+    height: 100vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.Information_Title{
+    display: flex;
+}
+
+.Information_Title h1{
+    display: flex;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 19px;
+}
+
+.Information_Title h1:first-child{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.Your_Email{
+    padding: 40px 88px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+.Your_Email p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+}
+
+/*-------------------------------------------------------*/
+.Shipping{
+    padding: 40px 88px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+.Shipping form{
+    padding: 40px 88px;
+    width: 100%;
+}
+.Shipping form input{
+    width: 100%;
+    padding: 26px 15px 10px;
+    background-color: #F5F4F4;
+    border: none;
+    margin-bottom: 10px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.Shipping form select{
+    width: 100%;
+    padding: 26px 15px 10px;
+    background-color: #F5F4F4;
+    border: none;
+    margin-bottom: 10px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.Shipping form input[type="submit"]{
+    background-color: black;
+    color: white;
+    padding: 15px 0px;
+}
+
+.Shipping_Option{
+    width: 100%;
+    border-top: 1px solid black ;
+}
+.Shipping_Option h2{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    margin-top: 12px;
+}
+.Shipping_Option form{
+    padding: 20px 0px;
+    width: 100%;
+}
+.Shipping_Option form{
+    width: 100%;
+}
+.Shipping_Option p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+.Shipping-Title {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.Shipping-Title input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.Shipping_Title_Container{
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+}
+.Shipping_Title_Container p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+/*-------------------------------------------------------*/
+.Payment_Option{
+    width: 100%;
+}
+.Payment_Option h2{
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 10px 0px;
+}
+
+.Payment_Option form input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.payment-img sgv{
+    width: 38px;
+    height: 24px;
+}
+
+.Payment_Option input[type="submit"]{
+    background-color: black;
+    color: white;
+    padding: 15px 0px;
+    width: 100%;
+}
+
+/*-----------------------------------------*/
+.Cart_List_Container{
+    width: 417px;
+    height: 100vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: white;
+    margin-left: 10px;
+}
+
+.Cart_List_Header{
+    width: 100%;
+    padding: 40px 32px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Cart_List_Header h1{
+    font-size: 19px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bolder;
+}
+.Cart_List_Icon{
+    display: flex;
+    font-size: 19px;
+}
+.Cart_List_Icon h1{
+    font-size: 19px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bolder;
+    margin-left: 10px;
+}
+
+.Cart_List{
+    width: 100%;
+    height: 70%;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 24px 32px;
+}
+
+.Cart_Item{
+    width: 100%;
+    display: flex;
+    position: relative;
+    height: 96px;
+    margin-bottom: 20px;
+}
+
+.Cart_Item img{
+    width: 72px;
+    height: 96px;
+}
+
+.Cart_Item_Content{
+    padding: 0px 0px 0px 10px;
+    width: 100%;
+}
+
+.Cart_Item_Header{
+    width: 100%;
+    position: relative;
+}
+.Cart_Item_Header h1{
+    font-size: 15px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.Cart_Item_Header p{
+    font-size: 12px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.Cart_Item_Header button{
+    background-color: white;
+    border: none;
+    color: black;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.Cart_Item_Price{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.Price{
+    display: flex;
+}
+.Price p{
+    font-size: 12px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.Cart_Item_Amount_Change{
+    display: flex;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+
+}
+.Cart_Item_Amount_Change button{
+    width: 28px;
+    height: 22px;
+    background-color: white;
+    font-size: 12px;
+    border: none;
+}
+.Cart_Item_Amount_Change p{
+    width: 28px;
+    height: 22px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+/*----------------------------------------------*/
+.Cart_Total_Info{
+    width: 100%;
+    padding: 20px 32px 24px;
+    border-top: 1px solid lightgray;
+}
+.Cart_Total_Info table{
+    width: 100%;
+}
+.Cart_Total_Info table tr td{
+    font-size: 15px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.Cart_Total_Info table tr td:last-child{
+    text-align: right;
+}
+
+/*------------------------------------*/
+.Place_Order_Container{
+    width: 100%;
+    padding: 20px 32px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Place_Order_Container .button{
+    width: 100%;
+    padding: 10px 50px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Nunito Sans', sans-serif; font-size: 14px
+}
+
+/*--------------------------*/
+@media (max-width: 1090px){
+    .Checkout_Container{
+        flex-direction: column-reverse;
+    }
+    .Information_Container{
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+    .Your_Email{
+        margin-bottom: 65px;
+    }
+    .Shipping{
+        width: 100%;
+    }
+    .Cart_List_Container{
+        width: 100%;
+        overflow: auto;
+        margin-bottom: 20px;
+    }
+    .Place_Order_Container{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: white;
+    }
+}

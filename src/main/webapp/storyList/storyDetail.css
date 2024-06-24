@@ -1,0 +1,68 @@
+.Story_Thumbnail_Tile{
+    width: 100%;
+    height: 591px;
+    background-size: 100%;
+    background-repeat: repeat;
+    background-position: center;
+    position: relative;
+}
+
+.Story_Thumbnail_Tile h1{
+    font-size: 64px;
+    width: 50%;
+    font-family: 'Nunito Sans', sans-serif;
+    position: absolute;
+    left: 10%;
+    bottom: 20%;
+}
+
+.Story_Description{
+    width: 100%;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Story_Description .line{
+    width: 90%;
+    border: 10px solid black;
+    margin-bottom: 100px;
+}
+
+.Story_Description md-block{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.Story_Description h1{
+    font-size: 40px;
+    font-family: 'Nunito Sans', sans-serif;
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.Story_Description p{
+    font-size: 24px;
+    font-family: 'Nunito Sans', sans-serif;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.Story_Description img{
+    width: 744px;
+    height: 963px;
+    object-fit: cover;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 1090px){
+
+    .Story_Description md-block{
+        width: 90%;
+    }
+}

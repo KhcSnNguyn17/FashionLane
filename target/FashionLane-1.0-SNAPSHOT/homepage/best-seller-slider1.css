@@ -1,0 +1,90 @@
+.Best_Seller_Slider{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper{
+    display: flex;
+    max-width: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper i{
+    top: 50%;
+    height: 44px;
+    width: 44px;
+    cursor: pointer;
+    font-size: 3rem;
+    position: absolute;
+    text-align: center;
+    transform: translateY(-50%);
+    transition: transform 0.1s linear;
+}
+.wrapper i:active{
+    transform: translateY(-50%) scale(0.9);
+}
+.wrapper i:first-child{
+    left: 0;
+}
+.wrapper i:last-child{
+    right: 0;
+}
+.wrapper .carousel{
+    font-size: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+}
+.carousel a{
+    user-select: none;
+    font-family: 'Nunito Sans', sans-serif;
+    margin-left: 14px;
+    object-fit: cover;
+}
+.carousel img{
+    width: 400px;
+}
+
+.Best_Seller_Text{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 10px;
+    color: black;
+    margin-top: 1vh;
+}
+
+.Best_Seller_Text h1{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.carousel img:first-child{
+    margin-left: 0px;
+}
+
+@media (max-width: 1200px) {
+    .Best_Seller_Text{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1090px){
+    .carousel a{
+        margin-left: 14px;
+        width: calc(100% / 1);
+    }
+    .carousel img{
+        width: 90vw;
+    }
+    .Best_Seller_Text{
+        width: 90vw;
+    }
+}

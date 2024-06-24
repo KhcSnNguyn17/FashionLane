@@ -1,0 +1,38 @@
+/*font-family: 'Nunito Sans', sans-serif;*/
+.Ad_Container{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F5F1E0;
+    flex-direction: row;
+    margin-top: 20vh;
+}
+
+.Ad_Container div{
+    text-align: center;
+}
+
+.Ad_Container div i {
+    font-size: 5rem;
+    margin-top: 10vh;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.Ad_Container div h1{
+    font-size: 1.5rem;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.Ad_Container div p{
+    margin-bottom: 10vh;
+    font-size: 1rem;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+@media (max-width: 1080px) {
+    .Ad_Container{
+        flex-direction: column;
+    }
+}

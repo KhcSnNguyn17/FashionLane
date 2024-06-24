@@ -1,0 +1,209 @@
+/*font-family: 'Nunito Sans', sans-serif;*/
+
+.Product_Detail_Container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 32px 80px 128px;
+}
+
+/*----------------------------------------------------------------------------*/
+.Product_Image_Container{
+    width: 960px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.Product_Image_Container img{
+    width: 470px;
+    margin: 3px;
+}
+
+/*--------------------------------------------------------------------------------*/
+.Product_Detail{
+    width: 396px;
+    padding: 10px;
+}
+.Product_Name{
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+.Product_Name p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 12px;
+}
+.Product_Name h1{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 24px;
+}
+.Category_Tag{
+    font-size: 12px;
+}
+.Name_And_Price{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5vh ;
+}
+.Price{
+    display: flex;
+    flex-direction: row;
+}
+.Price p:first-child{
+    text-decoration: line-through;
+    margin-right: 5px;
+    font-size: 24px;
+}
+.Price p:last-child{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+
+/*--------------------------------------------------------------------------------*/
+.Product_Color{
+    width: 100%;
+    margin-top: 5vh;
+}
+.Color{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.Product_Color h1{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+}
+.Product_Color a{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    margin-right: 30px;
+}
+.Product_Color a div{
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+/*-------------------------------------------------*/
+.Product_Size{
+    margin-top: 20px;
+}
+.Product_Size h1{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+}
+
+.Size{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.Size a{
+    width: 44px;
+    height: 40px;
+    text-align: center;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+}
+
+.radiocheck_container{
+    display: flex;
+}
+.radiocheck{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+}
+
+input[type=radio] {
+    padding: 0.5em;
+    -webkit-appearance: none;
+    outline: 0.1em solid black;
+    outline-offset: 0.1em;
+    width: 35px;
+    height: 35px;
+}
+
+input[type=radio]:checked {
+    display: inline-block;
+    background-color: #000;
+}
+
+.radiocheck p {
+    position: absolute;
+    font-size: 12px;
+    z-index: -1;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+/*---------------------------------------------------------*/
+.Product_Detail button{
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 16px 0px;
+    margin-top: 5vh;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+/*-------------------------------------------------------------*/
+.Product_Description{
+    width: 100%;
+    border-top: 1px solid lightgray;
+    margin-top: 5vh;
+}
+.Product_Description h1{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+.Product_Description p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+}
+@media (max-width: 1090px){
+    .Product_Detail_Container{
+        display: flex;
+        flex-direction: column;
+        padding: 0px;
+    }
+    .Product_Image_Container{
+        width: 100%;
+    }
+    .Product_Image_Container img{
+        display: none;
+    }
+    .Product_Image_Container img:first-child{
+        width: 100%;
+        margin: 0px;
+        display: block;
+    }
+
+    .Product_Detail{
+        width: 100%;
+        padding: 30px;
+    }
+    .Product_Name h1{
+        font-size: 20px;
+    }
+    .Price p{
+        font-size: 20px;
+    }
+}
