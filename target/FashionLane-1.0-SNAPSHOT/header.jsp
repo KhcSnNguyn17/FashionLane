@@ -61,75 +61,9 @@
                     </c:if>
                     <%--            <a href="login.jsp" class="user"><i class="ri-user-3-line"></i></a>--%>
                     <c:if test="${customerLogin != null && customerLogin.role == 4}">
-                    <a class="cart" id="cart-icon"><i class="ri-shopping-cart-2-line"></i></a>
+                    <a href="cart" class="cart" id="cart-icon"><i class="ri-shopping-cart-2-line"></i></a>
                     </c:if>
             </div>
-            <c:if test="${customerLogin != null && customerLogin.role == 4}">
-                <div class="cart_container">
-                    <a class='bx bx-x' id="x-icon"></a>
-                    <div class="cart_list">
-                        <h1>Your cart</h1>
-
-                        <c:set var="totalValue" value="0"/>
-                        <c:set var="totalCartItem" value="0"/>
-
-                        <c:forEach items="${sessionScope.cartItemList}" var="item">
-                            <div class="cart_item">
-                                <a class="cart_item_img">
-                                    <img src="${pageContext.request.contextPath}/webImage/productImg/${item.getThumbnail()}" alt="">
-                                </a>
-                                <div class="cart_item_text">
-                                    <div class="cart_item_name">
-                                        <p>${item.getProductName()}</p>
-                                        <a href="DeleteFromCart?ProductID=${item.getProductID()}&variationID=${item.getVariationID()}"><i
-                                                class='bx bx-trash' style="color:black;"></i></a>
-                                    </div>
-                                    <p>${item.getSize_Name()} | ${item.getColor_Name()}</p>
-
-                                    <!-- Iterate through cart item details to calculate total item count -->
-                                    <c:forEach items="${sessionScope.cartItemList2}" var="o">
-                                        <c:if test="${o.getProductID() == item.getProductID() && o.getVariationID() == item.getVariationID()}">
-                                            <div class="cart_item_price">
-                                                <c:if test="${item.getDiscount() != 0}">
-                                                    <p>₫${item.getPrice() * o.getQuantity()}</p>
-                                                    <p>₫${item.getDiscount() * o.getQuantity()}</p>
-                                                </c:if>
-                                                <c:if test="${item.getDiscount() == 0}">
-                                                    <p>₫${item.getPrice() * o.getQuantity()}</p>
-                                                </c:if>
-                                                <!-- Increment total item count -->
-                                                <c:set var="totalCartItem" value="${totalCartItem + o.getQuantity()}"/>
-                                                <!-- Increment total value -->
-                                                <c:set var="totalValue" value="${totalValue + (item.getDiscount() != 0 ? item.getDiscount() * o.getQuantity() : item.getPrice() * o.getQuantity())}"/>
-                                                <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
-                                                    <div class="Cart_Item_Amount_Change">
-                                                        <button class='bx bx-minus' name="choice" value="minus"></button>
-                                                        <p id="amount">${ o.getQuantity() }</p>
-                                                        <button class='bx bx-plus' name="choice" value="plus"></button>
-                                                    </div>
-                                                    <input type="hidden" name="ProductID" value="${ o.getProductID() }">
-                                                    <input type="hidden" name="VariationID" value="${ o.getVariationID() }">
-                                                    <input type="submit" style="display: none;">
-                                                </form>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </c:forEach>
-                        <a  href="${pageContext.request.contextPath}/productList-servlet?categoryID=2&color_ID=all" style="font-family:'Nunito Sans';font-weight: bold;color: black">Choose More Product</a>
-                    </div>
-
-                    <div class="checkout_container">
-                        <div class="subtotal_container">
-
-                            <p>Subtotal (${totalCartItem} items)</p>
-                            <p>₫${totalValue}</p>
-                        </div>
-                        <a class="buttonCheckout" href="${pageContext.request.contextPath}/Checkout?input=3">Continue To Checkout</a>
-                    </div>
-                </div>
-            </c:if>
             <div class="menu_container">
                 <div class="menu_container1">
                     <a href="#">Best-Sellers</a>
