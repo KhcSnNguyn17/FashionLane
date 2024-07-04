@@ -147,7 +147,7 @@ public class OrderDetailDAO extends myDAO {
                 xOrderID = rs.getInt("OrderID");
                 xQuantity = rs.getInt("Quantity");
                 xPrice = rs.getInt("Price");
-                xOrderDate = rs.getDate("OrderDate");
+                xOrderDate = rs.getDate("Order_date");
                 od.add(new OrderDetail(xOrder_detailID, xProductID, xOrderID, xQuantity, xPrice, xOrderDate));
             }
             rs.close();
@@ -156,6 +156,36 @@ public class OrderDetailDAO extends myDAO {
             throw new RuntimeException(e);
         }
         return od;
+    }
+    
+    
+    public OrderDetail getOrderItemById(String orderDetailID) {
+        int xOrderID = Integer.parseInt(orderDetailID);
+        xSql = "select * from orderdetails od, product p where od.orderDetailID = ? and od.ProductID = p.ProductID";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, xOrderID);
+            rs = ps.executeQuery();
+            int xOrder_detailID;
+            int xProductID;
+            int xQuantity;
+            int xPrice;
+            Date xOrderDate;
+            while (rs.next()) {
+                xOrder_detailID = rs.getInt("OrderDetailID");
+                xProductID = rs.getInt("ProductID");
+                xOrderID = rs.getInt("OrderID");
+                xQuantity = rs.getInt("Quantity");
+                xPrice = rs.getInt("Price");
+                xOrderDate = rs.getDate("Order_date");
+                return new OrderDetail(xOrder_detailID, xProductID, xOrderID, xQuantity, xPrice, xOrderDate);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Get order by id: " + e);
+        }
+        return null;
     }
 
     public void insert(int orderID, String productID, String variationID, int quan, double price) {
@@ -235,4 +265,17 @@ public class OrderDetailDAO extends myDAO {
         }
         return null;
     }
+
+    public void deleteOrderDetailsByOrderID(int orderID) {
+        String sql = "DELETE FROM orderdetails WHERE OrderID = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, orderID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Fail: " + e);
+        }
+    }
+
 }
