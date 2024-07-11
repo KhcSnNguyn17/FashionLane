@@ -76,6 +76,70 @@ public class ShopOrderDAO extends myDAO {
         return so;
     }
 
+    public ShopOrder getLatestOrderByUserId(int userId) {
+        xSql = "SELECT TOP 1 * FROM shop_order where UserID = ? ORDER BY shop_orderID DESC";
+        int xShop_orderID;
+        int xUserID;
+        int xAddressID;
+        int xOrder_total;
+        int xOrder_status;
+        String xRecipient, xRecipent_phone;
+
+        ShopOrder so = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xShop_orderID = rs.getInt("shop_orderID");
+                xUserID = rs.getInt("UserID");
+                xAddressID = rs.getInt("AddressID");
+                xOrder_total = rs.getInt("Order_total");
+                xOrder_status = rs.getInt("Order_status");
+                xRecipient = rs.getString("recipient");
+                xRecipent_phone = rs.getString("recipent_phone");
+                so = new ShopOrder(xShop_orderID, xUserID, xAddressID, xOrder_total, xOrder_status, xRecipient, xRecipent_phone);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("getLatestOrder: " + e.getMessage());
+        }
+        return so;
+    }
+    
+    public ShopOrder getOrderId(int orderId) {
+        xSql = "SELECT TOP 1 * FROM shop_order where shop_orderID = ? ORDER BY shop_orderID DESC";
+        int xShop_orderID;
+        int xUserID;
+        int xAddressID;
+        int xOrder_total;
+        int xOrder_status;
+        String xRecipient, xRecipent_phone;
+
+        ShopOrder so = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, orderId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xShop_orderID = rs.getInt("shop_orderID");
+                xUserID = rs.getInt("UserID");
+                xAddressID = rs.getInt("AddressID");
+                xOrder_total = rs.getInt("Order_total");
+                xOrder_status = rs.getInt("Order_status");
+                xRecipient = rs.getString("recipient");
+                xRecipent_phone = rs.getString("recipent_phone");
+                so = new ShopOrder(xShop_orderID, xUserID, xAddressID, xOrder_total, xOrder_status, xRecipient, xRecipent_phone);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("shop_orderID: " + e.getMessage());
+        }
+        return so;
+    }
+
     public int getSaleWithMinOrder() {
         int userId = 0;
         xSql = "WITH UserOrderCount AS (\n"
@@ -103,7 +167,7 @@ public class ShopOrderDAO extends myDAO {
         }
         return -1;
     }
-
+    
     public int getSaleWithMinOrderReject(int userId) {
         int userReturn = 0;
         xSql = "WITH UserOrderCount AS (\n"
@@ -300,6 +364,42 @@ public class ShopOrderDAO extends myDAO {
         return (t);
     }
 
+    public List<ShopOrder> findAllForDelivery() {
+        List<ShopOrder> t = new ArrayList<>();
+        xSql = "select * from SaleAssignment sa\n"
+                + "join shop_order so ON sa.orderId = so.shop_orderID\n"
+                + "JOIN Order_Status os ON so.Order_status = os.id\n"
+                + "Where so.Order_status >= 2";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int xShop_orderID;
+            int xUserID;
+            int xAddressID;
+            int xOrder_total;
+            int xOrder_status;
+            String xRecipient, xRecipent_phone;
+            while (rs.next()) {
+                xShop_orderID = rs.getInt("shop_orderID");
+                xUserID = rs.getInt("UserID");
+                xAddressID = rs.getInt("AddressID");
+                xOrder_total = rs.getInt("Order_total");
+                xOrder_status = rs.getInt("Order_status");
+                xRecipient = rs.getString("recipient");
+                xRecipent_phone = rs.getString("recipent_phone");
+                t.add(new ShopOrder(xShop_orderID, xUserID,
+                        xAddressID, xOrder_total, xOrder_status,
+                        xRecipient, xRecipent_phone));
+            }
+
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
     public List<DailySaleRevenue> getSuccessfullyCompletedOrders(int salerId, String startDate, String endDate) {
         String sql = "SELECT sa.userId AS sale_id, OD.order_date AS order_date, SUM(o.Order_total) AS total_revenue \n"
                 + "FROM saleAssignment sa \n"
@@ -339,6 +439,30 @@ public class ShopOrderDAO extends myDAO {
             System.out.println("Get total_revenue by saler: " + e);
         }
         return dailySales;
+    }
+
+    public void deleteOrderByOrderID(int orderID) {
+        String sql = "DELETE FROM shop_order WHERE shop_orderID = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, orderID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Ex: " + e);
+        }
+    }
+
+    public void deleteSaleAssignmentByOrderID(int orderID) {
+        String sql = "DELETE FROM saleAssignment WHERE orderID = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, orderID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Ex: " + e);
+        }
     }
 
     public static void main(String[] args) {
