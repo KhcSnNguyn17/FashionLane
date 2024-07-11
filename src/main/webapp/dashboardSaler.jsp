@@ -1,9 +1,3 @@
-<%-- 
-    Document   : dashboardSaler
-    Created on : Jun 24, 2024, 3:59:18 AM
-    Author     : HP
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html

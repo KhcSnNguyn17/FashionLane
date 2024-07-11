@@ -1,6 +1,8 @@
 package model;
 
 import entity.Product;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -205,6 +207,64 @@ public class ProductDAO extends myDAO {
         return (t);
     }
 
+    public Product getProductByID(String productId) {
+        int id = Integer.parseInt(productId);
+        String sql = "SELECT DISTINCT s.size_Name, v.VariationID, v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, "
+                + "p.ProductName, p.Price, col.color_Name, (p.Price - (p.Price * pro.DiscountRate / 100)) AS 'DiscountPrice' "
+                + "FROM variation v "
+                + "JOIN product_img pi ON v.product_img_ID = pi.product_img_ID "
+                + "JOIN product p ON p.ProductID = v.ProductID "
+                + "JOIN color col ON v.color_ID = col.color_ID "
+                + "JOIN size s ON v.size_ID = s.size_ID "
+                + "JOIN collection collec ON p.CollectionID = collec.CollectionID "
+                + "JOIN promotion pro ON collec.PromotionID = pro.PromotionID "
+                + "WHERE p.ProductID = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String thumbnail = rs.getString("thumbnail");
+                String productImg1 = rs.getString("product_img_1");
+                String productImg2 = rs.getString("product_img_2");
+                String productImg3 = rs.getString("product_img_3");
+                String productName = rs.getString("ProductName");
+                String colorName = rs.getString("color_Name");
+                String sizeName = rs.getString("size_name");
+                double price = rs.getDouble("Price");
+                double discountPrice = rs.getDouble("DiscountPrice");
+                int variationID = rs.getInt("VariationID");
+
+                Product product = new Product(
+                        id,
+                        thumbnail,
+                        productImg1,
+                        productImg2,
+                        productImg3,
+                        null,
+                        0,
+                        productName,
+                        colorName,
+                        sizeName,
+                        price,
+                        0,
+                        variationID,
+                        discountPrice
+                );
+                return product;
+            }
+
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public Product getProductByProIDColName(String xId, String xColor_Name) {
         int i = Integer.parseInt(xId);
         xSql = "select DISTINCT s.size_Name, v.VariationID, v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name, (p.Price-(p.Price*pro.DiscountRate/100)) 'DiscountPrice'\n" + "from variation v, product_img pi, product p , category c, color col, size s, promotion pro, collection collec\n" + "where col.color_Name like '%" + xColor_Name + "%'\n" + "and p.ProductID = ?\n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and p.CollectionID = collec.CollectionID\n" + "and collec.PromotionID = pro.PromotionID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
@@ -298,6 +358,23 @@ public class ProductDAO extends myDAO {
             ps.close();
         } catch (Exception e) {
             System.out.println("minusQuantity: " + e.getMessage());
+        }
+    }
+
+    public void increaseQuantityOfProduct(String proID, String variID, int quantity) {
+        int xProID = Integer.parseInt(proID);
+        int xVariID = Integer.parseInt(variID);
+        xSql = "update variation set qty_in_stock = qty_in_stock + ? where ProductID = ? and variationID = ?";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, quantity);
+            ps.setInt(2, xProID);
+            ps.setInt(3, xVariID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("increaseQuantityOfProduct: " + e.getMessage());
         }
     }
 
