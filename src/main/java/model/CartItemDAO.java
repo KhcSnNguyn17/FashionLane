@@ -91,7 +91,7 @@ public class CartItemDAO extends myDAO {
             rs.close();
             ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error: " + e);
         }
         return ci;
     }

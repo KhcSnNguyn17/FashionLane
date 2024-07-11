@@ -104,6 +104,35 @@ public class ShopOrderDAO extends myDAO {
         return -1;
     }
 
+    public int getSaleWithMinOrderReject(int userId) {
+        int userReturn = 0;
+        xSql = "WITH UserOrderCount AS (\n"
+                + "    SELECT u.UserID, u.UserName, u.Role, COUNT(sa.orderId) AS AssignedOrders\n"
+                + "    FROM [dbo].[user] u\n"
+                + "    LEFT JOIN [dbo].[SaleAssignment] sa ON u.UserID = sa.userId\n"
+                + "    WHERE u.Role = 2 and u.UserID != ? \n"
+                + "    GROUP BY u.UserID, u.UserName, u.Role\n"
+                + ")\n"
+                + "SELECT TOP 1 UserID \n"
+                + "FROM UserOrderCount\n"
+                + "ORDER BY AssignedOrders ASC;";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                userReturn = rs.getInt("UserID");
+                return userReturn;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("getLatestOrder: " + e.getMessage());
+        }
+        return -1;
+    }
+
     public void insertOrder(ShopOrder so) {
         xSql = "insert into shop_order(UserID,Order_status,recipient,recipent_phone) values (?,?,?,?)";
         try {
@@ -272,12 +301,12 @@ public class ShopOrderDAO extends myDAO {
     }
 
     public List<DailySaleRevenue> getSuccessfullyCompletedOrders(int salerId, String startDate, String endDate) {
-          String sql = "SELECT sa.userId AS sale_id, OD.order_date AS order_date, SUM(o.Order_total) AS total_revenue \n" +
-                     "FROM saleAssignment sa \n" +
-                     "INNER JOIN [shop_order] o ON sa.orderId = o.shop_orderID \n" +
-                     "INNER JOIN (SELECT DISTINCT OrderID, order_date FROM orderdetails) OD ON OD.OrderID = sa.orderId \n" +
-                     "INNER JOIN Order_Status os ON os.id = o.Order_status \n" +
-                     "WHERE os.name = 'Successfully' AND sa.userId = ? \n";
+        String sql = "SELECT sa.userId AS sale_id, OD.order_date AS order_date, SUM(o.Order_total) AS total_revenue \n"
+                + "FROM saleAssignment sa \n"
+                + "INNER JOIN [shop_order] o ON sa.orderId = o.shop_orderID \n"
+                + "INNER JOIN (SELECT DISTINCT OrderID, order_date FROM orderdetails) OD ON OD.OrderID = sa.orderId \n"
+                + "INNER JOIN Order_Status os ON os.id = o.Order_status \n"
+                + "WHERE os.name = 'Successfully' AND sa.userId = ? \n";
 
         if (startDate != null && endDate != null) {
             sql += "AND OD.order_date BETWEEN ? AND ? \n";
@@ -308,7 +337,7 @@ public class ShopOrderDAO extends myDAO {
             }
         } catch (SQLException e) {
             System.out.println("Get total_revenue by saler: " + e);
-        } 
+        }
         return dailySales;
     }
 

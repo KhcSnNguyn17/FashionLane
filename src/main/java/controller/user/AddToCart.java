@@ -27,13 +27,13 @@ public class AddToCart extends HttpServlet {
     private static final String CART_SUCCESS = "Product has been added to cart!!!";
 
     /**
-     * Handles the HTTP GET method.
-     * Sets the response content type to text/html with UTF-8 encoding.
+     * Handles the HTTP GET method. Sets the response content type to text/html
+     * with UTF-8 encoding.
      *
-     * @param request  the HttpServletRequest object
+     * @param request the HttpServletRequest object
      * @param response the HttpServletResponse object
      * @throws ServletException if a servlet error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,13 +43,13 @@ public class AddToCart extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP POST method.
-     * Adds a product to the user's cart if the user is logged in, otherwise prompts for login.
+     * Handles the HTTP POST method. Adds a product to the user's cart if the
+     * user is logged in, otherwise prompts for login.
      *
-     * @param request  the HttpServletRequest object
+     * @param request the HttpServletRequest object
      * @param response the HttpServletResponse object
      * @throws ServletException if a servlet error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -96,7 +96,7 @@ public class AddToCart extends HttpServlet {
      *
      * @param productID the product ID
      * @param colorName the color name
-     * @param sizeName  the size name
+     * @param sizeName the size name
      * @return the Variation object, or null if not found
      */
     private Variation getVariation(String productID, String colorName, String sizeName) {
@@ -108,14 +108,14 @@ public class AddToCart extends HttpServlet {
     /**
      * Handles adding a product to the cart.
      *
-     * @param request   the HttpServletRequest object
-     * @param response  the HttpServletResponse object
-     * @param session   the HttpSession object
-     * @param currUser  the current User object
+     * @param request the HttpServletRequest object
+     * @param response the HttpServletResponse object
+     * @param session the HttpSession object
+     * @param currUser the current User object
      * @param productID the product ID
      * @param variation the Variation object
      * @throws ServletException if a servlet error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     private void handleAddToCart(HttpServletRequest request, HttpServletResponse response, HttpSession session, User currUser, String productID, Variation variation)
             throws ServletException, IOException {
@@ -137,8 +137,8 @@ public class AddToCart extends HttpServlet {
     /**
      * Adds the specified product and variation to the user's cart.
      *
-     * @param session   the HttpSession object
-     * @param currUser  the current User object
+     * @param session the HttpSession object
+     * @param currUser the current User object
      * @param productID the product ID
      * @param variation the Variation object
      */
@@ -172,13 +172,13 @@ public class AddToCart extends HttpServlet {
     /**
      * Updates the session with the current user's cart items.
      *
-     * @param session  the HttpSession object
+     * @param session the HttpSession object
      * @param currUser the current User object
      */
     private void updateSessionCartItems(HttpSession session, User currUser) {
         // Create a CartItemDAO object to retrieve cart items
         CartItemDAO cartItemDAO = new CartItemDAO();
-        
+
         // Get the user's cart items and update the session attributes
         List<Product> cartItemList = cartItemDAO.getUserItem(currUser.getUserID());
         List<CartItem> cartItemList2 = cartItemDAO.getListCartItemByUserId(currUser.getUserID());
@@ -189,11 +189,11 @@ public class AddToCart extends HttpServlet {
     /**
      * Redirects to the product detail page with an error message.
      *
-     * @param request  the HttpServletRequest object
+     * @param request the HttpServletRequest object
      * @param response the HttpServletResponse object
      * @param errorMsg the error message to display
      * @throws ServletException if a servlet error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     private void redirectToProductDetailWithError(HttpServletRequest request, HttpServletResponse response, String errorMsg)
             throws ServletException, IOException {

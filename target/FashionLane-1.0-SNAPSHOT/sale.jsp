@@ -53,6 +53,16 @@
         <script src="bootstrap/assets/js/config.js"></script>
 
         <link rel="stylesheet" href="css/sale-manager.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap4.css"/>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+        <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#data-table").DataTable();
+            });
+        </script>
     </head>
 
     <body>
@@ -130,26 +140,22 @@
                     <div class="content-wrapper">
                         <!-- Content -->
                         <div class="container-xxl flex-grow-1 container-p-y ">
-                            <h4 class="fw-bold py-3 mb-4">Customer Orders Management</h4>
-
-                            <div class="filter-search-container">
-                                <div class="search-bar">
-                                    <input type="text" id="search-input" placeholder="Search orders..." />
-                                    <button id="search-button">Search</button>
-                                </div>
+                            <h4 class="fw-bold py-3 mb-4">Customer Orders Management for Salers</h4>
+<!--                            <div class="filter-search-container">
                                 <div class="filter-bar">
                                     <select id="status-filter">
                                         <option value="">Filter by status</option>
                                         <option value="Pending">Pending</option>
-                                        <option value="Prepared Order">Processing</option>
-                                        <option value="Package Order">Shipped</option>
-                                        <option value="Delivering">Delivered</option>
-                                        <option value="Successfully">Delivered</option>
+                                        <option value="Prepared Order">Prepared Order</option>
+                                        <option value="Package Order">Package Order</option>
+                                        <option value="Delivering">Delivering</option>
+                                        <option value="Successfully">Successfully</option>
+                                        <option value="Successfully">Confirmed</option>
+                                        <option value="Successfully">Not Received</option>
                                     </select>
                                     <button id="filter-button">Filter</button>
                                 </div>
-                            </div>
-
+                            </div>-->
                             <c:if test="${not empty sessionScope.msg}">
                                 <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align: center">
                                     ${sessionScope.msg}
@@ -172,10 +178,10 @@
                                     session.removeAttribute("err");
                                 %>
                             </c:if>
-                            <div class="card">
-                                <h5 class="card-header">Orders</h5>
+                            <div class="card" style="padding: 15px;">
+                                <h5 class="card-header" style="margin-left: -10px">Orders</h5>
                                 <div class="table-responsive text-nowrap listtable">
-                                    <table class="table" id="orders-table">
+                                    <table style="width: 100%" class="table" id="data-table">
                                         <thead>
                                             <tr>
                                                 <th>Order ID</th>
@@ -184,6 +190,7 @@
                                                 <th>Phone's Number</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
@@ -200,27 +207,37 @@
                                                     <td>
                                                         <c:choose>
                                                             <c:when test="${s.getOrder_status() == 1}">
-                                                                <span style="color: orange">Pending</span>
+                                                                <span style="color: gray">Pending</span>
                                                             </c:when>
                                                             <c:when test="${s.getOrder_status() == 2}">
-                                                                Prepared Order
+                                                                <span style="color: blue">Prepared Order</span>
                                                             </c:when>
                                                             <c:when test="${s.getOrder_status() == 3}">
-                                                                Package Order
+                                                                <span style="color: blue">Package Order</span>
                                                             </c:when>
                                                             <c:when test="${s.getOrder_status() == 4}">
-                                                                Delivering
+                                                                <span style="color: blue">Delivering</span>
                                                             </c:when>
                                                             <c:when test="${s.getOrder_status() == 5}">
-                                                                <span style="color: green">Successfully</span>
-
+                                                                <span style="color: greenyellow">Successfully</span>
                                                             </c:when>
-                                                            <c:otherwise>
-                                                                Unknown Status
-                                                            </c:otherwise>
+                                                            <c:when test="${s.getOrder_status() == 6}">
+                                                                <span style="color: greenyellow">Confirmed</span>
+                                                            </c:when>
+                                                            <c:when test="${s.getOrder_status() == 7}">
+                                                                <span style="color: red">Not Received</span>
+                                                            </c:when>
                                                         </c:choose>
                                                     </td>
-                                                    <td><button class="confirm-btn" data-bs-toggle="modal" data-bs-target="#edit${s.shop_orderID}">Change status</button></td>
+                                                    <td>
+                                                        <c:if test="${s.getOrder_status() == 1}">
+                                                            <form action="saler" method="POST">
+                                                                <button onclick="return confirm('Are you sure to confirm this order?')" class="btn btn-success" name="status" value="2" data-bs-target="#edit45">Confirm</button>
+                                                                <button onclick="return confirm('Are you sure to cancel this order?')" class="btn btn-danger" name="status" value="8" data-bs-target="#edit45">Reject</button>
+                                                                <input  type="hidden" name="id" value="${s.shop_orderID}">
+                                                            </form>
+                                                        </c:if>
+                                                    </td>
 
                                                     <td>
                                                         <div class="dropdown"> <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -245,9 +262,10 @@
                                                                 <label class="form-text">Choose status</label>
                                                                 <div class="form-control">
                                                                     <select class="form-check" name="status">
-                                                                        <option class="form-select">Select option:</option>
                                                                         <c:forEach items="${listOrderStatus}" var="o">
-                                                                            <option class="form-select" value="${o.id}" <c:if test="${o.id == s.order_status}">selected</c:if>>${o.name}</option>
+                                                                            <c:if test="${o.id == s.order_status || (o.id) == s.order_status + 1}">
+                                                                                <option class="form-select" value="${o.id}" ${o.id == s.order_status ? "selected" : ""}>${o.name}</option>
+                                                                            </c:if>
                                                                         </c:forEach>
                                                                     </select>
                                                                 </div>
@@ -286,7 +304,6 @@
 
         <!-- Core JS -->
         <!-- build:js assets/vendor/js/core.js -->
-        <script src="bootstrap/assets/vendor/libs/jquery/jquery.js"></script>
         <script src="bootstrap/assets/vendor/libs/popper/popper.js"></script>
         <script src="bootstrap/assets/vendor/js/bootstrap.js"></script>
         <script src="bootstrap/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>

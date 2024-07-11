@@ -24,7 +24,7 @@ import model.ShopOrderDAO;
  */
 @WebServlet(name = "SaleServlet", urlPatterns = {"/saler"})
 public class SaleServlet extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,13 +37,12 @@ public class SaleServlet extends HttpServlet {
             List<OrderStatus> listOrderStatus = osd.findAll();
             request.setAttribute("listOrder", listOrder);
             request.setAttribute("listOrderStatus", listOrderStatus);
-            // Thiết lập attribute 'sales' cho request
             request.getRequestDispatcher("sale.jsp").forward(request, response);
         } else {
             response.sendRedirect("login-servlet");
         }
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -54,16 +53,22 @@ public class SaleServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             int status = Integer.parseInt(request.getParameter("status"));
             try {
-                orderDAO.updateStatusOrder(status, id);
-                session.setAttribute("msg", "Status update successfully !");
+                if (status == 2) {
+                    orderDAO.updateStatusOrder(status, id);
+                    session.setAttribute("msg", "Status update successfully !");
+                } else {
+                    int userSend = orderDAO.getSaleWithMinOrderReject(curUser.getUserID());
+                    orderDAO.updateSaleAssignment(id, userSend);
+                     session.setAttribute("msg", "Reject successfully !");
+                }
             } catch (Exception e) {
-                session.setAttribute("err", "Status update Failed : "+e.getMessage());
+                session.setAttribute("err", "Status update Failed : " + e.getMessage());
             }
             response.sendRedirect("saler");
-            
+
         } else {
             response.sendRedirect("login-servlet");
         }
     }
-    
+
 }
